@@ -13,6 +13,7 @@ const create = async (user) => {
         console.log(err)
     }
 }
+
 const list = async (signal) => {
     try {
         let response = await fetch('/api/users/', {
@@ -24,6 +25,7 @@ const list = async (signal) => {
         console.log(err)
     }
 }
+
 const read = async (params, credentials, signal) => {
     try {
         let response = await fetch('/api/users/' + params.userId, {
@@ -40,6 +42,7 @@ const read = async (params, credentials, signal) => {
         console.log(err)
     }
 }
+
 const update = async (params, credentials, user) => {
     try {
         let response = await fetch('/api/users/' + params.userId, {
@@ -56,6 +59,7 @@ const update = async (params, credentials, user) => {
         console.log(err)
     }
 }
+
 const remove = async (params, credentials) => {
     try {
         let response = await fetch('/api/users/' + params.userId, {
