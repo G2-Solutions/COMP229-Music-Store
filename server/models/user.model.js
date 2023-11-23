@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const User = require('./user.model');
+const bcrypt = require('bcrypt');
+
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -31,13 +32,18 @@ const UserSchema = new mongoose.Schema({
 UserSchema.virtual('password')
     .set(function (password) {
         this._password = password;
-        this.hashed_password = password;
+        this.salt = bcrypt.genSaltSync(10);
+        this.hashed_password = bcrypt.hashSync(password, this.salt);
     })
     .get(function () {
         return this._password;
     });
 
-UserSchema.path('hashed_password').validate(function (v) {
+UserSchema.methods.authenticate = function (plainText) {
+    return bcrypt.compareSync(plainText, this.hashed_password);
+};
+
+UserSchema.path('hashed_password').validate(function () {
     if (this._password && this._password.length < 6) {
         this.invalidate('password', 'Password must be at least 6 characters.');
     }
@@ -45,5 +51,13 @@ UserSchema.path('hashed_password').validate(function (v) {
         this.invalidate('password', 'Password is required');
     }
 }, null);
+
+UserSchema.pre('save', function (next) {
+    if (this.isModified('password') || this.isNew) {
+        this.salt = bcrypt.genSaltSync(10);
+        this.hashed_password = bcrypt.hashSync(this.password, this.salt);
+    }
+    next();
+});
 
 module.exports = mongoose.model('User', UserSchema);

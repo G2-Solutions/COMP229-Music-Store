@@ -1,5 +1,7 @@
 const User = require('../models/user.model.js');
 const extend = require ('lodash/extend.js');
+const errorHandler = require('../helpers/dbErrorHandler');
+
 
 const create = async (req, res) => {
     const user = new User(req.body)
@@ -63,14 +65,15 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
     try {
         let user = req.profile
-        let deletedUser = await user.remove()
+        let deletedUser = await user.deleteOne()
         deletedUser.hashed_password = undefined
         deletedUser.salt = undefined
         res.json(deletedUser)
     } catch (err) {
+        console.log('Error deleting user: ', err)
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
         })
     }
 }
-module.exports = { create, userByID, read, list, remove, update }
+module.exports = { create, userByID, read, list, remove, update}

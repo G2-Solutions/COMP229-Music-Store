@@ -4,10 +4,14 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const userRouter = require('./server/routes/user.routes');
 const assetsRouter = require("./server/assets-router");
+const authRoutes = require('./server/routes/auth.routes');
+
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use('/', authRoutes);
+
 
 // app.use("/src", assetsRouter);
 // app.use("/", express.static(path.join(__dirname, "music-store/public")));
