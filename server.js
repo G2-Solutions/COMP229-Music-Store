@@ -6,10 +6,19 @@ const userRouter = require('./server/routes/user.routes');
 const assetsRouter = require("./server/assets-router");
 const authRoutes = require('./server/routes/auth.routes');
 
+
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use('/', authRoutes);
+
+
+// app.use("/src", assetsRouter);
+// app.use("/", express.static(path.join(__dirname, "music-store/public")));
+
+// app.get("/*", (_req, res) => {
+//     res.sendFile(path.join(__dirname, "public", "index.html"));
+// })
 
 mongoose.connect('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2', {
   dbName: 'MusicStore'
