@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { signin } from './api-user';
+import '../styles/signInForm.css';
 
 const SignIn = () => {
   const [values, setValues] = useState({
@@ -34,21 +35,21 @@ const SignIn = () => {
   }
 
   return (
+    <div className="signInFormContainer">
+    <h2>Sign In</h2>
     <div>
-      <h2>Sign In</h2>
-      <div>
-        <label>Email:</label>
-        <input type="text" onChange={handleChange('email')} value={values.email} />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" onChange={handleChange('password')} value={values.password} />
-      </div>
-      <div>
-        <button onClick={clickSubmit}>Sign In</button>
-      </div>
-      {values.error && <p>{values.error}</p>}
+      <label>Email:</label>
+      <input type="text" onChange={handleChange('email')} value={values.email} />
     </div>
+    <div>
+      <label>Password:</label>
+      <input type="password" onChange={handleChange('password')} value={values.password} />
+    </div>
+    <div>
+      <button onClick={clickSubmit}>Sign In</button>
+    </div>
+    {values.error && <p>{values.error}</p>}
+  </div>
   );
 };
 

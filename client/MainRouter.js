@@ -2,6 +2,7 @@ import React from 'react'
 import {Route, Routes} from 'react-router-dom'
 import PrivateRoute from './auth/PrivateRoute'
 import Home from './core/Home.js'
+import About from './core/About.js'
 import Signup from './user/SignUp.js';
 import Signin from './user/SignIn.js';
 import Profile from './user/Profile.js';
@@ -14,6 +15,7 @@ const MainRouter = () => {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/profile" element={<Profile />} />

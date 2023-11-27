@@ -1,0 +1,35 @@
+.about {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left; 
+    background-color:burlywood;
+  }
+  
+  .about header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  .about h1 {
+    color: #333; 
+  }
+  
+  .about p {
+    color: #333; 
+    margin-bottom: 15px; 
+  }
+  
+  .about footer {
+    margin-top: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+
+  .about footer p {
+    color: #fff; 
+    margin: 0; 
+    text-align: center;
+  }

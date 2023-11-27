@@ -1,0 +1,57 @@
+/* signupForm.css */
+
+/* Style for the main container */
+.signupContainer {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: burlywood;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  /* Style for the form elements */
+  .signupContainer input[type="text"],
+  .signupContainer input[type="email"],
+  .signupContainer input[type="password"] {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Style for the error message */
+  .signupContainer p {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  /* Style for the submit button */
+  .signupContainer button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .signupContainer button:hover {
+    background-color: #555;
+  }
+  
+  /* Style for the success message and sign-in button */
+  .signupContainer .successMessage {
+    margin-top: 20px;
+  }
+  
+  .signupContainer .successMessage button {
+    color: white;
+    background-color: blue;
+    cursor: pointer;
+  }
+  
