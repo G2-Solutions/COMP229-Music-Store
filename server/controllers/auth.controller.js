@@ -1,75 +1,63 @@
-import User from '../models/user.model'
-import jwt from 'jsonwebtoken'
-import expressJwt from 'express-jwt'
-import config from './../../config/config'
+var User = require('../models/user.model.js');
+const { expressjwt: jwt } = require("express-jwt");
+const expressjwt = require('express-jwt');
+const config = require('./../../config/config.js');
+const bcrypt = require('bcrypt');
+
 
 const signin = async (req, res) => {
-  try {
-    let user = await User.findOne({
-      "email": req.body.email
-    })
-    if (!user)
-      return res.status('401').json({
-        error: "User not found"
-      })
+    try {
+        console.log('Attempting to find user with email:', req.body.email); 
+        let user = await User.findOne({ "email": req.body.email });
+        console.log('User found:', user); // Debug log
+        
+        if (!user) {
+            return res.status(401).json({ error: "User not found" });
+        }
 
-    if (!user.authenticate(req.body.password)) {
-      return res.status('401').send({
-        error: "Email and password don't match."
-      })
+        if (!bcrypt.compareSync(req.body.password, user.hashed_password)) {
+            return res.status(401).send({ error: "Email and password don't match." });
+        }
+
+        const token = jwt.sign({ _id: user._id }, config.jwtSecret);
+        res.cookie('t', token, { expire: new Date() + 9999 });
+
+        return res.json({
+            token,
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email
+            }
+        });
+    } catch (err) {
+        return res.status(401).json({ error: "Could not sign in" });
     }
-
-    const token = jwt.sign({
-      _id: user._id
-    }, config.jwtSecret)
-
-    res.cookie("t", token, {
-      expire: new Date() + 9999
-    })
-
-    return res.json({
-      token,
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email
-      }
-    })
-
-  } catch (err) {
-
-    return res.status('401').json({
-      error: "Could not sign in"
-    })
-
-  }
-}
+};
 
 const signout = (req, res) => {
-  res.clearCookie("t")
-  return res.status('200').json({
-    message: "signed out"
-  })
-}
+    res.clearCookie("t");
+    return res.status(200).json({
+        message: "signed out"
+    });
+};
 
-const requireSignin = expressJwt({
-  secret: config.jwtSecret,
-  userProperty: 'auth'
-})
+const requireSignin = jwt({
+    secret: config.jwtSecret,
+    algorithms: ["HS256"],
+    userProperty: 'auth'
+});
 
 const hasAuthorization = (req, res, next) => {
-  const authorized = req.profile && req.auth && req.profile._id == req.auth._id
-  if (!(authorized)) {
-    return res.status('403').json({
-      error: "User is not authorized"
-    })
-  }
-  next()
-}
+    const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
 
-export default {
-  signin,
-  signout,
-  requireSignin,
-  hasAuthorization
-}
+    if (!authorized) {
+        return res.status(403).json({
+            error: "User is not authorized"
+        });
+    }
+
+    next();
+};
+
+module.exports = { signin, signout, requireSignin, hasAuthorization };

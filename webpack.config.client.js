@@ -34,11 +34,7 @@ const config = {
           new webpack.HotModuleReplacementPlugin(),
           new webpack.NoEmitOnErrorsPlugin()
     ],
-    resolve: {
-        alias: {
-          'react-dom': '@hot-loader/react-dom'
-        }
-    }
+
 }
 
 module.exports = config

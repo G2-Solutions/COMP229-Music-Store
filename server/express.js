@@ -15,9 +15,7 @@ import ReactDOMServer from 'react-dom/server'
 import MainRouter from './../client/MainRouter'
 import { StaticRouter } from 'react-router-dom'
 
-import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
-import theme from './../client/theme'
-//end
+
 
 //comment out before building for production
 import devBundle from './devBundle'
@@ -49,10 +47,8 @@ app.get('*', (req, res) => {
   const context = {}
   const markup = ReactDOMServer.renderToString(
     sheets.collect(
-          <StaticRouter location={req.url} context={context}>
-            <ThemeProvider theme={theme}>
+          <StaticRouter location={req.url} context={context}>           
               <MainRouter />
-            </ThemeProvider>
           </StaticRouter>
         )
     )
