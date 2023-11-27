@@ -1,4 +1,4 @@
-var User = require('../models/user.model.js');
+const User = require('../models/user.model.js');
 const extend = require ('lodash/extend.js');
 const errorHandler = require('../helpers/dbErrorHandler');
 
