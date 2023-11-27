@@ -41,7 +41,7 @@ const signout = (req, res) => {
 };
 
 const requireSignin = jwt({
-    secret: config.jwtSecret,
+    secret: process.env.JWT_SECRET || "YOUR_secret_key",
     algorithms: ["HS256"],
     userProperty: 'auth'
 });
