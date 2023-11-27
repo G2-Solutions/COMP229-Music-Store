@@ -1,5 +1,8 @@
 import React from 'react'
-import { hydrate } from 'react-dom'
-import App from './App'
-
-hydrate(<App/>, document.getElementById('root'))
+import ReactDOM from 'react-dom/client'
+import App from './App.js'
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
+)
