@@ -1,9 +1,7 @@
 import config from './../config/config'
 import app from './express'
 import mongoose from 'mongoose'
-const userRouter = require('./server/routes/user.routes');
-const assetsRouter = require("./server/assets-router");
-const authRoutes = require('./server/routes/auth.routes');
+
 
 // Connection URL
 mongoose.Promise = global.Promise
