@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 import auth from './../auth/auth-helper'
-import {Redirect} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 //import {Signin} from './api-auth.js'
 
 
@@ -66,3 +66,4 @@ export default function Signin(props) {
       </Card>
     )
 }
+
