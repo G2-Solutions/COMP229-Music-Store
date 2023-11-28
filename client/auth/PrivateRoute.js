@@ -7,7 +7,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
             <Component {...props} />
         ) : (
             <Navigate to={{
-                pathname: '/signin',
+                pathname: '/login',
                 state: { from: props.location }
             }} />
         )

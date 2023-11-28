@@ -8,15 +8,15 @@ const Users = () => {
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
-
+  
     list(signal).then((data) => {
       if (data && data.error) {
         console.log(data.error);
       } else {
-        setUsers(data);
+        setUsers(data || []);
       }
     });
-
+  
     return function cleanup() {
       abortController.abort();
     };

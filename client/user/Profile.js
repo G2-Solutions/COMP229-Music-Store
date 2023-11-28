@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { read } from './api-user.js';
-import { Navigate, Link } from 'react-router-dom';
+import { Navigate, Link, useParams } from 'react-router-dom';
+import auth from '../auth/auth-helper.js';
+
 
 const useStyles = {
   root: {
@@ -39,27 +41,32 @@ const Profile = ({ match }) => {
   const [user, setUser] = useState({});
   const [redirectToSignin, setRedirectToSignin] = useState(false);
   const jwt = auth.isAuthenticated();
+  const { userId } = useParams();
 
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    read({ userId: match.params.userId }, { t: jwt.token }, signal).then((data) => {
-      if (data && data.error) {
-        setRedirectToSignin(true);
-      } else {
-        setUser(data);
+    read({ userId: userId }, { t: jwt.token }, signal).then((data) => {
+      if (!abortController.signal.aborted) {
+        if (data && data.error) {
+          setRedirectToSignin(true);
+        } else {
+          setUser(data);
+        }
       }
     });
+
 
     return function cleanup() {
       abortController.abort();
     };
-  }, [match.params.userId]);
+  }, [userId]);
 
   if (redirectToSignin) {
-    return <Redirect to="/signin" />;
+    return <Navigate to="/login" />;
   }
+
 
   return (
     <div style={useStyles.root}>
@@ -72,7 +79,7 @@ const Profile = ({ match }) => {
           <div style={useStyles.listItemText}>
             <p>{user.name}</p>
             <p>{user.email}</p>
-            {auth.isAuthenticated().user && auth.isAuthenticated().user._id == user._id && (
+            {auth.isAuthenticated().user && auth.isAuthenticated().user._id == user._id && user._id && (
               <div>
                 <Link to={"/user/edit/" + user._id} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <button style={{ marginRight: '16px' }}>Edit</button>

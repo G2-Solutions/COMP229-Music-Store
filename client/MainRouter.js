@@ -3,11 +3,11 @@ import {Route, Routes} from 'react-router-dom'
 import PrivateRoute from './auth/PrivateRoute'
 import Home from './core/Home.js'
 import Signup from './user/SignUp.js';
-import Signin from './auth/SignIn.js';
+import Login from './auth/Login.js';
 import Profile from './user/Profile.js';
 import EditProfile from './user/EditProfile.js';
 import DeleteUser from './user/DeleteUser.js';
-import User from './user/Users.js';
+import Users from './user/Users.js';
 
 const MainRouter = () => {
   return (
@@ -15,12 +15,11 @@ const MainRouter = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/editprofile" element={<EditProfile />} />
-        <Route path="/deleteuser" element={<DeleteUser />} />
-        <Route path="/user" element={<User />} />
-        
+        <Route path="/deleteuser/:userId" element={<DeleteUser />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
     </div>
   );

@@ -1,4 +1,5 @@
 import { signout } from './api-auth.js'
+import jwt from 'jsonwebtoken';
 
 const auth = {
   isAuthenticated() {
