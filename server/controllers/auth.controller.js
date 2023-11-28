@@ -1,16 +1,14 @@
 const User = require('../models/user.model.js');
-const jwt = require('jsonwebtoken');
-const { expressjwt } = require('express-jwt');
+const { expressjwt: jwt } = require("express-jwt");
 const config = require('./../../config/config.js');
 const bcrypt = require('bcrypt');
 
-
 const signin = async (req, res) => {
     try {
-        console.log('Attempting to find user with email:', req.body.email); 
+        console.log('Attempting to find user with email:', req.body.email);
         let user = await User.findOne({ "email": req.body.email });
         console.log('User found:', user); // Debug log
-        
+
         if (!user) {
             return res.status(401).json({ error: "User not found" });
         }
@@ -42,8 +40,8 @@ const signout = (req, res) => {
     });
 };
 
-const requireSignin = expressjwt({
-    secret: config.jwtSecret,
+const requireSignin = jwt({
+    secret: process.env.JWT_SECRET || "YOUR_secret_key",
     algorithms: ["HS256"],
     userProperty: 'auth'
 });

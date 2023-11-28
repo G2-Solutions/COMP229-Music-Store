@@ -1,2 +1,1 @@
-# COMP229-Music-Store
-COMP229 Group Project
+~# COMP229-Music-Store
