@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import { signin } from './api-user';
+import { useNavigate } from 'react-router-dom';
 import '../styles/signInForm.css';
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     email: '',
     password: '',
     error: '',
-    redirectToReferrer: false,
   });
 
   const handleChange = (name) => (event) => {
@@ -25,31 +25,29 @@ const SignIn = () => {
       if (data && data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        setValues({ ...values, error: '', redirectToReferrer: true });
+        setValues({ ...values, error: '' });
+        // Redirect to home page after successful sign-in
+        navigate('/');
       }
     });
   };
 
-  if (values.redirectToReferrer) {
-    return <Redirect to="/" />;
-  }
-
   return (
     <div className="signInFormContainer">
-    <h2>Sign In</h2>
-    <div>
-      <label>Email:</label>
-      <input type="text" onChange={handleChange('email')} value={values.email} />
+      <h2>Sign In</h2>
+      <div>
+        <label>Email:</label>
+        <input type="text" onChange={handleChange('email')} value={values.email} />
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" onChange={handleChange('password')} value={values.password} />
+      </div>
+      <div>
+        <button onClick={clickSubmit}>Sign In</button>
+      </div>
+      {values.error && <p>{values.error}</p>}
     </div>
-    <div>
-      <label>Password:</label>
-      <input type="password" onChange={handleChange('password')} value={values.password} />
-    </div>
-    <div>
-      <button onClick={clickSubmit}>Sign In</button>
-    </div>
-    {values.error && <p>{values.error}</p>}
-  </div>
   );
 };
 
