@@ -6,19 +6,19 @@ const auth = {
     if (typeof window == "undefined")
       return false
 
-    if (sessionStorage.getItem('jwt'))
-      return JSON.parse(sessionStorage.getItem('jwt'))
+    if (sessionStorage.getItem('jwtToken'))
+      return JSON.parse(sessionStorage.getItem('jwtToken'))
     else
       return false
   },
   authenticate(jwt, cb) {
     if (typeof window !== "undefined")
-      sessionStorage.setItem('jwt', JSON.stringify(jwt))
+      sessionStorage.setItem('jwtToken', JSON.stringify(jwt))
     cb()
   },
   clearJWT(cb) {
     if (typeof window !== "undefined")
-      sessionStorage.removeItem('jwt')
+      sessionStorage.removeItem('jwtToken')
     cb()
     //optional
     signout().then((data) => {
