@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { read } from './api-user.js';
-import { Navigate, Link, useParams } from 'react-router-dom';
+import { Navigate, Link, useNavigate, useLocation } from 'react-router-dom';
 import auth from '../auth/auth-helper.js';
-
 
 const useStyles = {
   root: {
@@ -37,36 +36,39 @@ const useStyles = {
   },
 };
 
-const Profile = ({ match }) => {
+
+const Profile = () => {
   const [user, setUser] = useState({});
-  const [redirectToSignin, setRedirectToSignin] = useState(false);
   const jwt = auth.isAuthenticated();
-  const { userId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    read({ userId: userId }, { t: jwt.token }, signal).then((data) => {
-      if (!abortController.signal.aborted) {
-        if (data && data.error) {
-          setRedirectToSignin(true);
-        } else {
-          setUser(data);
+    if (!jwt) {
+      navigate('/login', { state: { from: location } });
+    } else {
+      read({ userId: jwt.user._id }, { t: jwt.token }, signal).then((data) => {
+        if (!abortController.signal.aborted) {
+          if (data && data.error) {
+            navigate('/login', { state: { from: location } });
+          } else {
+            setUser(data);
+          }
         }
-      }
-    });
-
+      });
+    }
 
     return function cleanup() {
       abortController.abort();
     };
-  }, [userId]);
+  }, [jwt]);
 
-  if (redirectToSignin) {
+  if (!jwt) {
     return <Navigate to="/login" />;
   }
-
 
   return (
     <div style={useStyles.root}>
