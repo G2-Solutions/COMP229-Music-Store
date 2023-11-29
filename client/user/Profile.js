@@ -44,8 +44,6 @@ const Profile = ({ match }) => {
   const { userId } = useParams();
 
   useEffect(() => {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
 
     read({ userId: userId }, { t: jwt.token }, signal).then((data) => {
       if (!abortController.signal.aborted) {

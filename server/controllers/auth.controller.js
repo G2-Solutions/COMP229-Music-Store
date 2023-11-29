@@ -3,6 +3,12 @@ const User = require('../models/user.model.js');
 const config = require('./../../config/config.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+<<<<<<< Updated upstream
+=======
+require('dotenv').config();
+
+
+>>>>>>> Stashed changes
 const signin = async (req, res) => {
     try {
         console.log('Attempting to find user with email:', req.body.email);
@@ -37,13 +43,15 @@ const signin = async (req, res) => {
     }
 };
 
+
 const signout = (req, res) => {
-    res.clearCookie("t");
+    //res.clearCookie("t");
     return res.status(200).json({
         message: "signed out"
     });
 };
 
+<<<<<<< Updated upstream
 
 
 const requireSignin = (req, res, next) => {
@@ -58,6 +66,13 @@ const requireSignin = (req, res, next) => {
     });
   };
   
+=======
+const requireSignin = expressjwt({
+    secret: process.env.JWT_SECRET,
+    algorithms: ["HS256"],
+    userProperty: 'auth'
+});
+>>>>>>> Stashed changes
 
 
 const hasAuthorization = (req, res, next) => {
