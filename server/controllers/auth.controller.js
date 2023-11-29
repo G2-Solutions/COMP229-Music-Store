@@ -3,12 +3,7 @@ const User = require('../models/user.model.js');
 const config = require('./../../config/config.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-<<<<<<< Updated upstream
-=======
-require('dotenv').config();
 
-
->>>>>>> Stashed changes
 const signin = async (req, res) => {
     try {
         console.log('Attempting to find user with email:', req.body.email);
@@ -51,8 +46,6 @@ const signout = (req, res) => {
     });
 };
 
-<<<<<<< Updated upstream
-
 
 const requireSignin = (req, res, next) => {
     jwt.verify(req.cookies.t, process.env.JWT_SECRET, (err, decoded) => {
@@ -66,13 +59,6 @@ const requireSignin = (req, res, next) => {
     });
   };
   
-=======
-const requireSignin = expressjwt({
-    secret: process.env.JWT_SECRET,
-    algorithms: ["HS256"],
-    userProperty: 'auth'
-});
->>>>>>> Stashed changes
 
 
 const hasAuthorization = (req, res, next) => {
