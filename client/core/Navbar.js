@@ -31,7 +31,7 @@ const Navbar = () => {
         </li>
         {!isSignedIn && (
           <li className="login" onClick={handleLogIn}>
-            Login
+            Sign In
           </li>
         )}
         {isSignedIn && (
