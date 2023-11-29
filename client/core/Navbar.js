@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <nav>
       <ul>
-        <li class="logo">
+        <li className="logo">
           <img src={logo} />
           MelodyMart
         </li>
@@ -20,7 +20,7 @@ const Navbar = () => {
         <li>
           <Link to="/profile">My Profile</Link>
         </li>
-        <li class="signout">
+        <li className="signout">
           Sign Out
         </li>
       </ul>

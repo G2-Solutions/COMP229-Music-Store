@@ -1,6 +1,27 @@
 @import url('https://fonts.cdnfonts.com/css/fun-groovy');
 
 body {
-    font-family: 'Fun Groovy', sans-serif;
     font-size: 20px;
+    background-color: #fefbfa;
+}
+
+nav {
+    font-family: 'Fun Groovy', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fun Groovy', sans-serif;
+}
+
+h1, h3, h5 {
+    color: #333;
+}
+
+h2, h4, h6 {
+    color: #ff4b0d;
+}
+
+footer {
+    font-family: 'Fun Groovy', sans-serif;
+    color: 
 }

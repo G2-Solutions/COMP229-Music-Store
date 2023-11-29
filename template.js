@@ -1,5 +1,5 @@
 export default () => {
-    return `<!doctype html>
+  return `<!doctype html>
       <html lang="en">
         <head>
           <meta charset="utf-8">
@@ -8,6 +8,7 @@ export default () => {
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           >
           <title>MelodyMart</title>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400">
           <link href="https://fonts.cdnfonts.com/css/fun-groovy" rel="stylesheet">
           <style>
               a{
