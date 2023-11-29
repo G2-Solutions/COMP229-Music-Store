@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/home.css';
 import Album from './Album';
+import AuthContext from '../auth/AuthContext';
 
 const albumData = [
   { album: 'Echo Park', artist: 'Advantage Lucy', imageSrc: require('../assets/images/albums/echopark.jpg').default },
@@ -18,6 +20,8 @@ const albumData = [
 ];
 
 const Home = () => {
+  const { isSignedIn } = useContext(AuthContext);
+
   return (
     <div className="home">
       <header>
@@ -38,6 +42,13 @@ const Home = () => {
             ))}
           </div>
         </section>
+        {!isSignedIn && (
+          <section className="signup-option">
+            <p>
+              Ready to explore? <Link to="/signup">Sign up</Link> to discover more music!
+            </p>
+          </section>
+        )}
       </main>
       <footer>
         <p>&copy; 2023 G2-Solutions. All rights reserved.</p>

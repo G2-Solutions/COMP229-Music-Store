@@ -15,6 +15,10 @@ const Navbar = () => {
     navigate('/');
   };
 
+  const handleLogIn = () => {
+    navigate('/login');
+  };
+
   return (
     <nav>
       <ul>
@@ -25,6 +29,11 @@ const Navbar = () => {
         <li>
           <Link to="/">Home</Link>
         </li>
+        {!isSignedIn && (
+          <li className="login" onClick={handleLogIn}>
+            Login
+          </li>
+        )}
         {isSignedIn && (
           <>
             <li>
