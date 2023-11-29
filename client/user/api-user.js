@@ -1,15 +1,15 @@
 const create = async (user) => {
   try {
-      let response = await fetch('/api/users/', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-      })
+    let response = await fetch('/api/users/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
     return await response.json()
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 }
@@ -21,7 +21,7 @@ const list = async (signal) => {
       signal: signal,
     })
     return await response.json()
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 }
@@ -38,10 +38,15 @@ const read = async (params, credentials, signal) => {
       }
     })
     return await response.json()
-  } catch(err) {
-    console.log(err)
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      console.log('Fetch request was aborted');
+    } else {
+      console.error('An unexpected error occurred:', err);
+    }
   }
 }
+
 
 const update = async (params, credentials, user) => {
   try {
@@ -55,7 +60,7 @@ const update = async (params, credentials, user) => {
       body: JSON.stringify(user)
     })
     return await response.json()
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 }
@@ -71,36 +76,15 @@ const remove = async (params, credentials) => {
       }
     })
     return await response.json()
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 }
-
-const signin = async (user) => {
-  try {
-    let response = await fetch('/api/auth/signin', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + credentials.t
-      },
-      body: JSON.stringify(user)
-    });
-
-    return await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-
 
 export {
   create,
   list,
   read,
   update,
-  signin,
   remove
 }

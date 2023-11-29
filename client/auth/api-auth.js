@@ -9,7 +9,9 @@ const signin = async (user) => {
       credentials: 'include',
       body: JSON.stringify(user)
     })
-    return await response.json()
+    const data = await response.json();
+    console.log(data);
+    return data;
   } catch(err) {
     console.log(err)
   }

@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { remove } from './api-user';
+import { useParams } from 'react-router-dom';
 
-export default function DeleteUser(props) {
+export default function DeleteUser() {
   const [open, setOpen] = useState(false);
-  const [Naviagte, setRedirect] = useState(false);
+  const [navigate, setNavigate] = useState(false);
+
+  const { userId } = useParams(); // get userId from URL parameters
 
   const clickButton = () => {
     setOpen(true);
   };
 
   const deleteAccount = () => {
-    remove({ userId: props.userId }, { t: jwt.token }).then((data) => {
+    remove({ userId }, { t: jwt.token }).then((data) => { // pass userId to remove function
       if (data && data.error) {
         console.log(data.error);
       } else {
         auth.clearJWT(() => console.log('deleted'));
-        setRedirect(true);
+        setNavigate(true);
       }
     });
   };
@@ -24,30 +28,13 @@ export default function DeleteUser(props) {
     setOpen(false);
   };
 
-  if (redirect) {
-    return <Redirect to="/" />;
+  if (navigate) {
+    return <Navigate to="/" />;
   }
 
   return (
     <span>
-      <button onClick={clickButton} style={{ color: 'red' }}>
-        Delete
-      </button>
-
-      {open && (
-        <div>
-          <div>{"Delete Account"}</div>
-          <div>
-            <p>Confirm to delete your account.</p>
-          </div>
-          <div>
-            <button onClick={handleRequestClose}>Cancel</button>
-            <button onClick={deleteAccount} style={{ color: 'red' }}>
-              Confirm
-            </button>
-          </div>
-        </div>
-      )}
+      {/* ... */}
     </span>
   );
 }
