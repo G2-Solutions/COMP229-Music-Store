@@ -1,5 +1,6 @@
 import React from 'react'
 import {Route, Routes} from 'react-router-dom'
+import './styles/styles.css';
 import PrivateRoute from './auth/PrivateRoute'
 import Home from './core/Home.js'
 import Signup from './user/SignUp.js';
