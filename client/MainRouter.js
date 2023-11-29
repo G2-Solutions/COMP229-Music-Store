@@ -4,7 +4,7 @@ import './styles/styles.css';
 import PrivateRoute from './auth/PrivateRoute'
 import Home from './core/Home.js'
 import Signup from './user/SignUp.js';
-import Login from './auth/Login.js';
+import SignIn from './auth/SignIn.js';
 import Profile from './user/Profile.js';
 // import EditProfile from './user/EditProfile.js';
 // import DeleteUser from './user/DeleteUser.js';
@@ -18,7 +18,7 @@ const MainRouter = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/users" element={<Users />} />
         <Route path="/profile" element={<PrivateRoute />}>
           <Route path=":userId" element={<Profile />} /> {/* Change this line */}

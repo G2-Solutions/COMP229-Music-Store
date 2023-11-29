@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import auth from './auth-helper';
 import { signin } from './api-auth';
 import AuthContext from './AuthContext';
+import '../styles/form-styles.css';
 
 const SignIn = () => {
   const { setSignIn } = useContext(AuthContext);
@@ -41,20 +42,22 @@ const SignIn = () => {
   }
 
   return (
-    <div>
-      <h2>Sign In</h2>
-      <div>
-        <label>Email:</label>
-        <input type="text" onChange={handleChange('email')} value={values.email} />
+    <div className="form-container">
+      <div className="form-card">
+        <h2>Sign In</h2>
+        <div>
+          <label>Email: </label>
+          <input type="text" placeholder="Email" className="form-input" onChange={handleChange('email')} value={values.email} />
+        </div>
+        <div>
+          <label>Password: </label>
+          <input type="password" placeholder="Password" className="form-input" onChange={handleChange('password')} value={values.password} />
+        </div>
+        <div>
+          <button onClick={clickSubmit} className="form-button">Sign In</button>
+        </div>
+        {values.error && <p className="form-error">{values.error}</p>}
       </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" onChange={handleChange('password')} value={values.password} />
-      </div>
-      <div>
-        <button onClick={clickSubmit}>Sign In</button>
-      </div>
-      {values.error && <p>{values.error}</p>}
     </div>
   );
 };

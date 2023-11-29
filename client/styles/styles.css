@@ -24,6 +24,10 @@ h2, h4, h6 {
     color: #ff4b0d;
 }
 
+button {
+    font-family: 'Fun Groovy', sans-serif;
+}
+
 footer {
     font-family: 'Fun Groovy', sans-serif;
     color: #ffb701;

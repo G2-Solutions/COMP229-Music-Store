@@ -25,7 +25,7 @@ const Navbar = () => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        {isSignedIn && (
+        {isSignedIn ? (
           <>
             <li>
               <Link to="/users">Users</Link>
@@ -35,6 +35,15 @@ const Navbar = () => {
             </li>
             <li className="signout" onClick={handleSignout}>
               Sign Out
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/signin">Sign In</Link>
+            </li>
+            <li className="signout">
+              <Link to="/signup">Sign Up</Link>
             </li>
           </>
         )}

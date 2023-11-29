@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+
 const signin = async (user) => {
   try {
     let response = await fetch('/auth/signin/', {
@@ -12,7 +14,7 @@ const signin = async (user) => {
     const data = await response.json();
     
     if (data.token) {
-      sessionStorage.setItem('jwtToken', data.token);
+      sessionStorage.setItem('jwt', data.token);
     }
 
     return data;
@@ -27,7 +29,7 @@ const signout = async () => {
     let response = await fetch('/auth/signout/', { method: 'GET' })
     const data = await response.json();
 
-    sessionStorage.removeItem('jwtToken');
+    sessionStorage.removeItem('jwt');
 
     return data;
   } catch(err) {

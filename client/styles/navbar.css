@@ -41,4 +41,18 @@ ul {
   background-color: burlywood;
   border-radius: 5px;
   padding: 10px 5px 5px 5px;
+  transition: background-color 0.3s linear;
+}
+
+.signout:hover {
+  cursor: pointer;
+  background-color: #ffb701;
+}
+
+.signout a {
+  color: #000;
+}
+
+.signout a:hover {
+  text-decoration: none;
 }
