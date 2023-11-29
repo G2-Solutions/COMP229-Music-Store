@@ -8,10 +8,12 @@ import Profile from './user/Profile.js';
 import EditProfile from './user/EditProfile.js';
 import DeleteUser from './user/DeleteUser.js';
 import Users from './user/Users.js';
+import Navbar from './core/Navbar.js';
 
 const MainRouter = () => {
   return (
     <div>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
