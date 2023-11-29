@@ -73,7 +73,7 @@ export default function Signup() {
           <div>
             <Link to="/login">
               <button autoFocus style={{ color: 'white', backgroundColor: 'blue' }}>
-                Sign In
+                Continue to sign in
               </button>
             </Link>
           </div>
