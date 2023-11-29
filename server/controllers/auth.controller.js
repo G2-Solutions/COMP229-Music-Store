@@ -1,8 +1,9 @@
 const User = require('../models/user.model.js');
-//const { expressjwt: jwt } = require("express-jwt");
+const { expressjwt: expressjwt } = require("express-jwt");
 const config = require('./../../config/config.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
 const signin = async (req, res) => {
     try {
         console.log('Attempting to find user with email:', req.body.email);
@@ -19,9 +20,10 @@ const signin = async (req, res) => {
             return res.status(401).send({ error: "Email and password don't match." });
         }
 
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '999h' });
-        console.log('Token:', token); 
+        console.log(process.env.JWT_SECRET);
 
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '999h' });
+        console.log('Token:', token);
 
         return res.json({
             token,
@@ -44,31 +46,21 @@ const signout = (req, res) => {
     });
 };
 
-
-
-const requireSignin = (req, res, next) => {
-    jwt.verify(req.cookies.t, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) {
-        return res.status(403).json({
-          error: 'Access denied'
-        });
-      }
-      req.auth = decoded;
-      next();
+const requireSignin =
+    expressjwt({
+        secret: process.env.JWT_SECRET,
+        algorithms: ["HS265"],
+        userProperty: 'auth'
     });
-  };
-  
-
 
 const hasAuthorization = (req, res, next) => {
-    const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
-
-    if (!authorized) {
-        return res.status(403).json({
+    const authorized = req.profile && req.auth && req.profile._id == req.auth._id
+    if (!(authorized)) {
+        return res.status('403').json({
             error: "User is not authorized"
-        });
+        })
     }
-    next();
-};
+    next()
+}
 
 module.exports = { signin, signout, requireSignin, hasAuthorization };
