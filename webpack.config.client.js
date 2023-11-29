@@ -15,6 +15,12 @@ const config = {
         filename: 'bundle.js',
         publicPath: '/dist/'
     },
+    resolve: {
+        fallback: {
+            "crypto": require.resolve("crypto-browserify"),
+            "process": require.resolve("process/browser")
+        }
+      },
     module: {
         rules: [
             {
@@ -36,7 +42,10 @@ const config = {
     },  
     plugins: [
           new webpack.HotModuleReplacementPlugin(),
-          new webpack.NoEmitOnErrorsPlugin()
+          new webpack.NoEmitOnErrorsPlugin(),
+          new webpack.ProvidePlugin({
+            process: 'process/browser'
+          }),
     ],
 
 }

@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { list } from './api-user.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import auth from '../auth/auth-helper.js';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const jwt = auth.isAuthenticated();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  if (!jwt) {
+    navigate('/login', { state: { from: location } });
+  }
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -13,7 +21,7 @@ const Users = () => {
       if (data && data.error) {
         console.log(data.error);
       } else {
-        setUsers(data);
+        setUsers(data || []);
       }
     });
 

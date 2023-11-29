@@ -1,0 +1,52 @@
+.album-cover {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    margin: 10px;
+}
+
+.album-cover img {
+    width: 200px;
+    height: auto;
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.album-cover:hover {
+    transform: scale(1.05);
+    border-radius: 0;
+}
+
+.album-cover:hover .overlay {
+    opacity: 1;
+}
+
+.overlay-content {
+    text-align: center;
+}
+
+h3,
+p {
+    margin: 0;
+}
+
+h3 {
+    color: #fff;
+}

@@ -9,16 +9,27 @@ const signin = async (user) => {
       credentials: 'include',
       body: JSON.stringify(user)
     })
-    return await response.json()
+    const data = await response.json();
+    
+    if (data.token) {
+      sessionStorage.setItem('jwtToken', data.token);
+    }
+
+    return data;
   } catch(err) {
     console.log(err)
   }
 }
 
+
 const signout = async () => {
   try {
     let response = await fetch('/auth/signout/', { method: 'GET' })
-    return await response.json()
+    const data = await response.json();
+
+    sessionStorage.removeItem('jwtToken');
+
+    return data;
   } catch(err) {
     console.log(err)
   }

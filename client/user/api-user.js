@@ -39,9 +39,14 @@ const read = async (params, credentials, signal) => {
     })
     return await response.json()
   } catch (err) {
-    console.log(err)
+    if (err.name === 'AbortError') {
+      console.log('Fetch request was aborted');
+    } else {
+      console.error('An unexpected error occurred:', err);
+    }
   }
 }
+
 
 const update = async (params, credentials, user) => {
   try {

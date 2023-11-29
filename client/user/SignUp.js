@@ -71,7 +71,7 @@ export default function Signup() {
         <div>
           <div>New Account successfully created.</div>
           <div>
-            <Link to="/signin">
+            <Link to="/login">
               <button autoFocus style={{ color: 'white', backgroundColor: 'blue' }}>
                 Sign In
               </button>

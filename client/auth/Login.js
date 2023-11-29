@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import auth from './auth-helper';
 import { signin } from './api-auth';
+import AuthContext from './AuthContext';
 
 const SignIn = () => {
+  const { setSignIn } = useContext(AuthContext);
+
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -28,6 +31,7 @@ const SignIn = () => {
         auth.authenticate(data, () => {
           setValues({ ...values, error: '', redirectToReferrer: true })
         })
+        setSignIn(true);
       }
     })
   }
