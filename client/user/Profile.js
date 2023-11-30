@@ -44,8 +44,6 @@ const Profile = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
 
     if (!jwt) {
       navigate('/login', { state: { from: location } });
