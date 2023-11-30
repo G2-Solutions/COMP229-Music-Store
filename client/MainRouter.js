@@ -20,7 +20,7 @@ const MainRouter = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/users" element={<Users />} />
-        <Route path="/profile" element={<PrivateRoute />}>
+        <Route path="/profile" element={<Profile />}>
           <Route path=":userId" element={<Profile />} /> {/* Change this line */}
           {/* <Route path="editprofile/:userId" element={<EditProfile />} />
           <Route path="deleteuser/:userId" element={<DeleteUser />} /> */}
