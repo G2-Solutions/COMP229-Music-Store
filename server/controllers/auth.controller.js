@@ -3,6 +3,7 @@ const User = require('../models/user.model.js');
 const config = require('./../../config/config.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
 const signin = async (req, res) => {
     try {
         console.log('Attempting to find user with email:', req.body.email);
@@ -37,13 +38,13 @@ const signin = async (req, res) => {
     }
 };
 
+
 const signout = (req, res) => {
-    res.clearCookie("t");
+    //res.clearCookie("t");
     return res.status(200).json({
         message: "signed out"
     });
 };
-
 
 
 const requireSignin = (req, res, next) => {

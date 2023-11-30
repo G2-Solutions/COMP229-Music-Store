@@ -18,16 +18,16 @@ const MainRouter = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/deleteuser/:userId" element={<DeleteUser />} />
+        <Route path="/user/:userId" element={<Profile />} />
         <Route path="/users" element={<Users />} />
-        <Route path="/profile" element={<PrivateRoute />}>
-          <Route path=":userId" element={<Profile />} /> {/* Change this line */}
-          {/* <Route path="editprofile/:userId" element={<EditProfile />} />
-          <Route path="deleteuser/:userId" element={<DeleteUser />} /> */}
-        </Route>
       </Routes>
     </div>
   );
 };
 
 export default MainRouter
+

@@ -52,7 +52,7 @@ const Profile = () => {
     } else {
       read({ userId: jwt.user._id }, { t: jwt.token }, signal).then((data) => {
         if (!abortController.signal.aborted) {
-          if (data && data.error) {
+          if (!data && data.error) {
             navigate('/login', { state: { from: location } });
           } else {
             setUser(data);
