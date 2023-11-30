@@ -1,6 +1,7 @@
-const express = require('express');
-const productCtrl = require('../controllers/product.controller');
-const authCtrl = require('../controllers/auth.controller');
+import productCtrl from '../controllers/product.controller'
+import express from 'express'
+import authCtrl from '../controllers/auth.controller'
+
 const router = express.Router();
 
 router.route('/api/products')
@@ -13,4 +14,4 @@ router.route('/api/products/:productId')
 
 router.param('productId', productCtrl.productByID);
 
-module.exports = router;
+export default router

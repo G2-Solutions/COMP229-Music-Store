@@ -1,37 +1,20 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const ProductSchema = new mongoose.Schema({
-    productName: {
+    albumName: {
         type: String,
         trim: true,
-        required: 'Product name is required'
+        required: 'Album name is required'
     },
-    description: {
+    artist: {
         type: String,
         trim: true,
-        required: 'Description is required'
+        required: 'Artist is required'
     },
-    category: {
+    picture: {
         type: String,
         trim: true,
-        required: 'Category is required'
-    },
-    price: {
-        type: Number,
-        required: 'Price is required'
-    },
-    quantityAvailable: {
-        type: Number,
-        required: 'Quantity available is required'
-    },
-    manufacturer: {
-        type: String,
-        trim: true,
-        required: 'Manufacturer is required'
-    },
-    releaseDate: {
-        type: Date,
-        required: 'Release date is required'
+        required: 'Picture is required'
     },
     createdAt: {
         type: Date,
@@ -43,4 +26,4 @@ const ProductSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Product', ProductSchema);
+export default mongoose.model('Product', ProductSchema);
