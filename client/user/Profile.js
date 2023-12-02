@@ -48,12 +48,12 @@ const Profile = () => {
     const signal = abortController.signal;
 
     if (!jwt) {
-      navigate('/login', { state: { from: location } });
+      navigate('/signin', { state: { from: location } });
     } else {
       read({ userId: jwt.user._id }, { t: jwt.token }, signal).then((data) => {
         if (!abortController.signal.aborted) {
           if (!data && data.error) {
-            navigate('/login', { state: { from: location } });
+            navigate('/signin', { state: { from: location } });
           } else {
             setUser(data);
           }
@@ -67,7 +67,7 @@ const Profile = () => {
   }, [jwt]);
 
   if (!jwt) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/signin" />;
   }
 
   return (
