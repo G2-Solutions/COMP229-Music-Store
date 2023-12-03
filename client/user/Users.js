@@ -10,7 +10,7 @@ const Users = () => {
   const location = useLocation();
 
   if (!jwt) {
-    navigate('/login', { state: { from: location } });
+    navigate('/signin', { state: { from: location } });
   }
 
   useEffect(() => {

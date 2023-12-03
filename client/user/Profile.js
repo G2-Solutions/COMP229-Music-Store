@@ -22,6 +22,7 @@ const Profile = () => {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
+<<<<<<< HEAD
     list(signal).then((data) => {
       if (data && data.error) {
         console.log(data.error);
@@ -29,12 +30,28 @@ const Profile = () => {
         setProfile(data || []);
       }
     });
+=======
+    if (!jwt) {
+      navigate('/signin', { state: { from: location } });
+    } else {
+      read({ userId: jwt.user._id }, { t: jwt.token }, signal).then((data) => {
+        if (!abortController.signal.aborted) {
+          if (!data && data.error) {
+            navigate('/signin', { state: { from: location } });
+          } else {
+            setUser(data);
+          }
+        }
+      });
+    }
+>>>>>>> 4b696a7ccd9cbe09c454a8333908645fc1817722
 
     return function cleanup() {
       abortController.abort();
     };
   }, []);
 
+<<<<<<< HEAD
   const updateProfile = (userId, user) => {
     console.log('Updating profile for user ID:', userId);
     console.log('Updating user data:', user);
@@ -72,6 +89,11 @@ const Profile = () => {
     setNewPassword('');
   };
   
+=======
+  if (!jwt) {
+    return <Navigate to="/signin" />;
+  }
+>>>>>>> 4b696a7ccd9cbe09c454a8333908645fc1817722
 
   return (
     <div style={{ padding: '16px', margin: '40px', maxWidth: '600px', margin: '0 auto' }}>

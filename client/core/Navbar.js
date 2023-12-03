@@ -29,12 +29,16 @@ const Navbar = () => {
         <li>
           <Link to="/">Home</Link>
         </li>
+<<<<<<< HEAD
         {!isSignedIn && (
           <li className="login" onClick={handleLogIn}>
             Sign In
           </li>
         )}
         {isSignedIn && (
+=======
+        {isSignedIn ? (
+>>>>>>> 4b696a7ccd9cbe09c454a8333908645fc1817722
           <>
             <li>
               <Link to="/users">Users</Link>
@@ -44,6 +48,15 @@ const Navbar = () => {
             </li>
             <li className="signout" onClick={handleSignout}>
               Sign Out
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/signin">Sign In</Link>
+            </li>
+            <li className="signout">
+              <Link to="/signup">Sign Up</Link>
             </li>
           </>
         )}

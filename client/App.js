@@ -7,7 +7,7 @@ const App = () => {
   const [isSignedIn, setSignIn] = useState(false);
 
   useEffect(() => {
-    const token = sessionStorage.getItem('jwtToken');
+    const token = sessionStorage.getItem('jwt');
     setSignIn(!!token);
   }, []);
 
