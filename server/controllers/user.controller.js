@@ -2,7 +2,6 @@ const User = require('../models/user.model.js');
 const extend = require ('lodash/extend.js');
 const errorHandler = require('../helpers/dbErrorHandler');
 
-
 const create = async (req, res) => {
     const user = new User(req.body)
     try {
@@ -16,6 +15,7 @@ const create = async (req, res) => {
         })
     }
 }
+
 const list = async (req, res) => {
     try {
         let users = await User.find().select('name email 	updated created')
@@ -26,21 +26,23 @@ const list = async (req, res) => {
         })
     }
 }
+
 const userByID = async (req, res, next, id) => {
     try {
         let user = await User.findById(id)
         if (!user)
-            return res.status('400').json({
+            return res.status(400).json({
                 error: "User not found"
             })
         req.profile = user
         next()
     } catch (err) {
-        return res.status('400').json({
+        return res.status(400).json({
             error: "Could not retrieve user"
         })
     }
 }
+
 const read = (req, res) => {
     req.profile.hashed_password = undefined
     req.profile.salt = undefined
@@ -62,6 +64,7 @@ const update = async (req, res) => {
         })
     }
 }
+
 const remove = async (req, res) => {
     try {
         let user = req.profile
@@ -76,4 +79,5 @@ const remove = async (req, res) => {
         })
     }
 }
+
 module.exports = { create, userByID, read, list, remove, update}

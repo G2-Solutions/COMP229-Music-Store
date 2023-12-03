@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/AlbumCover.css';
+import '../styles/album-cover.css';
 
 const AlbumCover = ({ album, artist, imageSrc }) => {
   return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/home.css';
 import Album from './Album';
+import G2Logo from '../assets/images/COMP229-Group-2-Logo.png';
 
 const albumData = [
   { album: 'Echo Park', artist: 'Advantage Lucy', imageSrc: require('../assets/images/albums/echopark.jpg').default },
@@ -41,6 +42,7 @@ const Home = () => {
       </main>
       <footer>
         <p>&copy; 2023 G2-Solutions. All rights reserved.</p>
+        <img className="g2logo" src={G2Logo} />
       </footer>
     </div>
   );

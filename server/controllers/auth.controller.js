@@ -3,11 +3,11 @@ const User = require('../models/user.model.js');
 const config = require('./../../config/config.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
 const signin = async (req, res) => {
     try {
         console.log('Attempting to find user with email:', req.body.email);
         let user = await User.findOne({ "email": req.body.email });
-        console.log('User found:', user); // Debug log
 
         if (!user) {
             console.log('User not found');
@@ -21,7 +21,7 @@ const signin = async (req, res) => {
 
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '999h' });
         console.log('Token:', token); 
-
+        res.cookie('t', token, { expire: new Date() + 9999 });
 
         return res.json({
             token,
@@ -44,8 +44,6 @@ const signout = (req, res) => {
     });
 };
 
-
-
 const requireSignin = (req, res, next) => {
     jwt.verify(req.cookies.t, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
@@ -57,8 +55,6 @@ const requireSignin = (req, res, next) => {
       next();
     });
   };
-  
-
 
 const hasAuthorization = (req, res, next) => {
     const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
