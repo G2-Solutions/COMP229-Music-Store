@@ -19,8 +19,8 @@ const MainRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/user/:userId" element={<Profile />} />
+        <Route path="/editprofile/:userId" element={<EditProfile />} />
         <Route path="/deleteuser/:userId" element={<DeleteUser />} />
         <Route path="/user/:userId" element={<Profile />} />
         <Route path="/users" element={<Users />} >

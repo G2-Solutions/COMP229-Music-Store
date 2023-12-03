@@ -6,7 +6,7 @@ import AuthContext from './AuthContext';
 import '../styles/form-styles.css';
 
 const SignIn = () => {
-  const { setSignIn } = useContext(AuthContext);
+  const { setSignIn, setAuthUser } = useContext(AuthContext);
 
   const [values, setValues] = useState({
     email: '',
@@ -33,6 +33,7 @@ const SignIn = () => {
           setValues({ ...values, error: '', redirectToReferrer: true })
         })
         setSignIn(true);
+        setAuthUser(data.user._id);
       }
     })
   }

@@ -3,8 +3,9 @@ import { BrowserRouter } from 'react-router-dom';
 import AuthContext from './auth/AuthContext';
 import MainRouter from './MainRouter';
 
-const App = () => {
+function App() {
   const [isSignedIn, setSignIn] = useState(false);
+  const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
     const token = sessionStorage.getItem('jwt');
@@ -13,7 +14,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <AuthContext.Provider value={{ isSignedIn, setSignIn }}>
+      <AuthContext.Provider value={{ isSignedIn, setSignIn, authUser, setAuthUser }}>
         <MainRouter />
       </AuthContext.Provider>
     </BrowserRouter>

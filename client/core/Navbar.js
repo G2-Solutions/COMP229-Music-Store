@@ -6,7 +6,7 @@ import { signout } from '../auth/api-auth.js';
 import AuthContext from '../auth/AuthContext.js'
 
 const Navbar = () => {
-  const { isSignedIn, setSignIn } = useContext(AuthContext);
+  const { isSignedIn, setSignIn, authUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSignout = async () => {
@@ -31,7 +31,7 @@ const Navbar = () => {
               <Link to="/users">Users</Link>
             </li>
             <li>
-              <Link to="/profile">My Profile</Link>
+              <Link to={`/user/${authUser}`}>My Profile</Link>
             </li>
             <li className="signout" onClick={handleSignout}>
               Sign Out
@@ -47,6 +47,7 @@ const Navbar = () => {
             </li>
           </>
         )}
+
       </ul>
     </nav>
   );

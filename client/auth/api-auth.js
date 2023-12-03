@@ -17,7 +17,7 @@ const signin = async (user) => {
       sessionStorage.setItem('jwt', data.token);
     }
 
-    return data;
+    return data.user;
   } catch(err) {
     console.log(err)
   }

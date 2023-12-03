@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { read } from './api-user.js';
-import { Navigate, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Navigate, Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 import auth from '../auth/auth-helper.js';
+import DeleteUser from './DeleteUser.js';
 
 const useStyles = {
   root: {
@@ -36,12 +37,12 @@ const useStyles = {
   },
 };
 
-
 const Profile = () => {
   const [user, setUser] = useState({});
   const jwt = auth.isAuthenticated();
   const navigate = useNavigate();
   const location = useLocation();
+  const { userId } = useParams(); // Get userId from URL
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -50,7 +51,7 @@ const Profile = () => {
     if (!jwt) {
       navigate('/signin', { state: { from: location } });
     } else {
-      read({ userId: jwt.user._id }, { t: jwt.token }, signal).then((data) => {
+      read({ userId: userId }, { t: jwt.token }, signal).then((data) => {
         if (!abortController.signal.aborted) {
           if (!data && data.error) {
             navigate('/signin', { state: { from: location } });
@@ -64,7 +65,7 @@ const Profile = () => {
     return function cleanup() {
       abortController.abort();
     };
-  }, [jwt]);
+  }, [jwt, userId]); // Add userId to dependency array
 
   if (!jwt) {
     return <Navigate to="/signin" />;
@@ -83,7 +84,7 @@ const Profile = () => {
             <p>{user.email}</p>
             {auth.isAuthenticated().user && auth.isAuthenticated().user._id == user._id && user._id && (
               <div>
-                <Link to={"/user/edit/" + user._id} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Link to={"/editprofile/" + user._id} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <button style={{ marginRight: '16px' }}>Edit</button>
                 </Link>
                 <DeleteUser userId={user._id} />
