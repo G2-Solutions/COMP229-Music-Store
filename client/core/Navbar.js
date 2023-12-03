@@ -15,10 +15,6 @@ const Navbar = () => {
     navigate('/');
   };
 
-  const handleLogIn = () => {
-    navigate('/login');
-  };
-
   return (
     <nav>
       <ul>
@@ -29,16 +25,7 @@ const Navbar = () => {
         <li>
           <Link to="/">Home</Link>
         </li>
-<<<<<<< HEAD
-        {!isSignedIn && (
-          <li className="login" onClick={handleLogIn}>
-            Sign In
-          </li>
-        )}
-        {isSignedIn && (
-=======
         {isSignedIn ? (
->>>>>>> 4b696a7ccd9cbe09c454a8333908645fc1817722
           <>
             <li>
               <Link to="/users">Users</Link>
