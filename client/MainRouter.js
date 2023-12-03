@@ -22,7 +22,6 @@ const MainRouter = () => {
         <Route path="/user/:userId" element={<Profile />} />
         <Route path="/editprofile/:userId" element={<EditProfile />} />
         <Route path="/deleteuser/:userId" element={<DeleteUser />} />
-        <Route path="/user/:userId" element={<Profile />} />
         <Route path="/users" element={<Users />} >
         </Route>
       </Routes>
