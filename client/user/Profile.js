@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { read } from './api-user.js';
 import { Navigate, Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 import auth from '../auth/auth-helper.js';
 import DeleteUser from './DeleteUser.js';
+import AuthContext from '../auth/AuthContext.js';
 
 const useStyles = {
   root: {
@@ -38,22 +39,23 @@ const useStyles = {
 };
 
 const Profile = () => {
+  const { authUser } = useContext(AuthContext);
   const [user, setUser] = useState({});
-  const jwt = auth.isAuthenticated();
   const navigate = useNavigate();
   const location = useLocation();
-  const { userId } = useParams(); // Get userId from URL
+  const { userId } = useParams();
 
   useEffect(() => {
+    const jwt = auth.isAuthenticated();
     const abortController = new AbortController();
     const signal = abortController.signal;
 
     if (!jwt) {
-      navigate('/signin', { state: { from: location } });
+      navigate('/', { state: { from: location } });
     } else {
       read({ userId: userId }, { t: jwt.token }, signal).then((data) => {
         if (!abortController.signal.aborted) {
-          if (!data && data.error) {
+          if (data && data.error) {
             navigate('/signin', { state: { from: location } });
           } else {
             setUser(data);
@@ -65,11 +67,13 @@ const Profile = () => {
     return function cleanup() {
       abortController.abort();
     };
-  }, [jwt, userId]); // Add userId to dependency array
+  }, [userId, navigate, location]);
 
-  if (!jwt) {
+  if (!auth.isAuthenticated()) {
     return <Navigate to="/signin" />;
   }
+
+  const authenticatedUser = auth.isAuthenticated().user;
 
   return (
     <div style={useStyles.root}>
@@ -82,7 +86,7 @@ const Profile = () => {
           <div style={useStyles.listItemText}>
             <p>{user.name}</p>
             <p>{user.email}</p>
-            {auth.isAuthenticated().user && auth.isAuthenticated().user._id == user._id && user._id && (
+            {authUser === user._id && user._id && (
               <div>
                 <Link to={"/editprofile/" + user._id} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <button style={{ marginRight: '16px' }}>Edit</button>

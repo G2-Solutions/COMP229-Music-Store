@@ -33,7 +33,6 @@ const SignIn = () => {
           setValues({ ...values, error: '', redirectToReferrer: true })
         })
         setAuthUser(data._id);
-        console.log(data._id);
         setSignIn(true);
       }
     })
