@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { list } from './api-user.js';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import auth from '../auth/auth-helper.js';
+import '../styles/users.css';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -31,31 +32,18 @@ const Users = () => {
   }, []);
 
   return (
-    <div style={{ padding: '16px', margin: '40px', maxWidth: '600px', margin: '0 auto' }}>
-      <h2 style={{ textAlign: 'center', color: '#333' }}>All Users</h2>
-      <ul style={{ padding: '0', listStyleType: 'none', margin: '0' }}>
+    <div className="container">
+      <h2>All Users</h2>
+      <ul className="userList">
         {users.map((item, i) => (
-          <Link to={`/user/${item._id}`} key={i} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <li
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '8px',
-                padding: '12px',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                backgroundColor: '#fff',
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                transition: 'box-shadow 0.3s ease-in-out',
-                cursor: 'pointer',
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)')}
-              onMouseOut={(e) => (e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)')}
-            >
-              <div style={{ marginRight: '16px', borderRadius: '50%', overflow: 'hidden', width: '40px', height: '40px' }}>
-                <img src="default-profile.png" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <Link to={`/user/${item._id}`} key={i} className="user-link">
+            <li className="userListItem">
+              <div>
+                <div>
+                  <p><strong>Name:</strong> {item.name}</p>
+                  <p><strong>Email:</strong> {item.email}</p>
+                </div>
               </div>
-              <div style={{ flex: '1' }}>{item.name}</div>
             </li>
           </Link>
         ))}

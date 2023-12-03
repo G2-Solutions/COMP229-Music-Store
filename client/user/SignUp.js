@@ -57,7 +57,7 @@ export default function Signup() {
             <div>New account successfully created.</div>
             <div>
               <Link to="/signin">
-                <button>
+                <button className="form-button">
                   Sign In
                 </button>
               </Link>

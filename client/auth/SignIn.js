@@ -32,7 +32,7 @@ const SignIn = () => {
         auth.authenticate(data, () => {
           setValues({ ...values, error: '', redirectToReferrer: true })
         })
-        setAuthUser(data._id);
+        setAuthUser(data.user._id);
         setSignIn(true);
       }
     })

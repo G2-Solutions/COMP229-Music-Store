@@ -17,12 +17,11 @@ const signin = async (user) => {
       sessionStorage.setItem('jwt', data.token);
     }
 
-    return data.user;
+    return data;
   } catch(err) {
     console.log(err)
   }
 }
-
 
 const signout = async () => {
   try {

@@ -4,39 +4,8 @@ import { Navigate, Link, useNavigate, useLocation, useParams } from 'react-route
 import auth from '../auth/auth-helper.js';
 import DeleteUser from './DeleteUser.js';
 import AuthContext from '../auth/AuthContext.js';
-
-const useStyles = {
-  root: {
-    maxWidth: '600px',
-    margin: 'auto',
-    padding: '24px',
-    marginTop: '40px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    borderRadius: '4px',
-  },
-  title: {
-    marginTop: '24px',
-    color: '#333',
-  },
-  listItem: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: '16px',
-  },
-  avatar: {
-    marginRight: '16px',
-    borderRadius: '50%',
-    overflow: 'hidden',
-    width: '40px',
-    height: '40px',
-  },
-  listItemText: {
-    flex: '1',
-  },
-  deleteButton: {
-    marginLeft: '16px',
-  },
-};
+import '../styles/styles.css';
+import '../styles/profile.css';
 
 const Profile = () => {
   const { authUser } = useContext(AuthContext);
@@ -76,33 +45,45 @@ const Profile = () => {
   const authenticatedUser = auth.isAuthenticated().user;
 
   return (
-    <div style={useStyles.root}>
-      <h2 style={useStyles.title}>Profile</h2>
-      <ul style={{ padding: '0', listStyleType: 'none', margin: '0' }}>
-        <li style={useStyles.listItem}>
-          <div style={useStyles.avatar}>
-            <img src="default-profile.png" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+    <div className="root">
+      <h2>{authUser === user._id ? "My Profile" : "Profile"}</h2>
+      <div className="gridContainer">
+        <div className="labelColumn">
+          <div className="listItemText">
+            <p><strong>Name:</strong></p>
           </div>
-          <div style={useStyles.listItemText}>
+          <div className="listItemText">
+            <p><strong>Email:</strong></p>
+          </div>
+          <div className="listItemText">
+            <p><strong>Joined:</strong></p>
+          </div>
+        </div>
+        <div className="infoColumn">
+          <div className="listItemText">
             <p>{user.name}</p>
+          </div>
+          <div className="listItemText">
             <p>{user.email}</p>
-            {authUser === user._id && user._id && (
-              <div>
-                <Link to={"/editprofile/" + user._id} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <button style={{ marginRight: '16px' }}>Edit</button>
-                </Link>
-                <DeleteUser userId={user._id} />
-              </div>
-            )}
           </div>
-        </li>
-        <hr />
-        <li style={useStyles.listItem}>
-          <div style={useStyles.listItemText}>
-            <p>{`Joined: ${new Date(user.created).toDateString()}`}</p>
+          <div className="listItemText">
+            <p>{new Date(user.created).toDateString()}</p>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
+      <div className="editDeleteContainer">
+        {authUser === user._id && user._id && (
+          <div>
+            <Link to={"/editprofile/" + user._id} className="edit-link">
+              <button className="edit-button">Edit</button>
+            </Link>
+            <DeleteUser userId={authUser} />
+          </div>
+        )}
+      </div>
+      {authUser !== user._id && user._id && (
+        <Link to={"/users"}><button className="edit-button">Back</button></Link>
+      )}
     </div>
   );
 };
