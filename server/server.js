@@ -8,8 +8,9 @@ import { configDotenv } from 'dotenv';
 import { userSettings } from './userSettings.js';
 
 // Connection URL
+const uri = process.env.MONGODB_URI;
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2', {
+mongoose.connect(uri, {
   dbName: 'MusicStore'
 });
 const db = mongoose.connection;
