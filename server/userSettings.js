@@ -1,5 +1,5 @@
 export const userSettings = {
-    serverConfig: {
-      environment: "development"
-    }
-    };
+  serverConfig: {
+    environment: "development"
+  }
+};

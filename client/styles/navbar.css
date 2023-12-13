@@ -8,11 +8,11 @@ nav {
   padding-top: 10px;
 }
 
-a {
+nav a {
   color: #ff4b0d;
 }
 
-a:hover {
+nav a:hover {
   text-decoration: underline;
 }
 

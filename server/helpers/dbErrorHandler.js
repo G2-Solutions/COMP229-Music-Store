@@ -17,6 +17,7 @@ const getErrorMessage = (err) => {
     }
     return message
 }
+
 const getUniqueErrorMessage = (err) => {
     let output
     try {
@@ -30,4 +31,5 @@ const getUniqueErrorMessage = (err) => {
     }
     return output
 }
+
 module.exports = { getErrorMessage };
